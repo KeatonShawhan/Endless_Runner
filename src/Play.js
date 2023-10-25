@@ -7,6 +7,7 @@ class Play extends Phaser.Scene {
       this.load.spritesheet('character', './assets/spritesheets/spritesheet.png', {
           frameWidth: 100
       })
+      this.load.image('platform', './assets/platform_sprite.png');
   }
 
   create() {
@@ -50,7 +51,8 @@ class Play extends Phaser.Scene {
               end: 6
           })
       })
-
+      width = game.config.width;
+      height = game.config.height;
       this.player = this.physics.add.sprite(width/2, height/2, 'character', 1).setScale(1);
       this.player.body.setGravityY(2000);
 
@@ -79,34 +81,28 @@ class Play extends Phaser.Scene {
       this.scoreBoard.add(scoreRect);
       this.physics.add.collider(this.player, this.scoreBoard);
 
-      this.random_array = [];
-      for (var i = 100; i < 550; i++) {
-        this.random_array.push(i); 
-      }
-
       // Platforms group
       this.platforms = this.physics.add.group();
 
-      // Sample platform (you can create more as needed)
-      let randomHeight = Phaser.Math.RND.pick(this.random_array);
-      this.platform1 = new Platform(this, width, randomHeight, 1, 2);
+      this.platform1 = new Platform(this, width, 0, 1, 2);
+      this.platform1.randomHeight();
       this.platforms.add(this.platform1);
-      // Sample platform (you can create more as needed)
-      randomHeight = Phaser.Math.RND.pick(this.random_array);
-      this.platform2 = new Platform(this, width, randomHeight, 1, 2);
+
+      this.platform2 = new Platform(this, width+500, 0, 1, 2);
+      this.platform2.randomHeight();
       this.platforms.add(this.platform2);
-      // Sample platform (you can create more as needed)
-      randomHeight = Phaser.Math.RND.pick(this.random_array);
-      this.platform3 = new Platform(this, width, randomHeight, 1, 2);
+
+      this.platform3 = new Platform(this, width+1000, 0, 1, 2);
+      this.platform3.randomHeight();
       this.platforms.add(this.platform3);
 
-      this.physics.add.collider(this.player, this.platforms);
+      this.physics.add.collider(this.player, this.platforms, this.onPlatformCollided, null, this);
+      
       // Detect when the player jumps on a platform
-      this.physics.add.overlap(this.player, this.platforms, this.onPlatformJumped, null, this);
   }
 
   update() {
-    const ACCELERATION = 2000; // Adjust this to your liking for the desired acceleration speed
+    const ACCELERATION = 1500;
 
     if (cursors.left.isDown) {
         this.player.setAccelerationX(-ACCELERATION);
@@ -124,7 +120,6 @@ class Play extends Phaser.Scene {
 
     // Jumping
     if (cursors.up.isDown && this.player.body.touching.down) {
-        // The jump force can be adjusted as needed
         this.player.setVelocityY(-1300);
     }
 
@@ -136,11 +131,10 @@ class Play extends Phaser.Scene {
     this.platform3.update();
 
   }
-  onPlatformJumped(player, platform) {
-    if (player.body.velocity.y > 0 && player.y < platform.y) { 
-        this.cameras.main.setBackgroundColor(platform.fillColor); 
+  onPlatformCollided(player, platform) {
+    if (player.body.touching.down) {
+        this.cameras.main.setBackgroundColor(platform.color); 
     }
 }
-
 
 }
