@@ -2,6 +2,7 @@
 Endless Runner: Stick Run
 Name: Keaton Shawhan
 Date: 11/6/23
+Hours spent: 8
 Points hit (8/15):
   Use multiple Scene classes (dictated by your game's style) (1)
   Have some form of player input/control appropriate to your game design (1)
