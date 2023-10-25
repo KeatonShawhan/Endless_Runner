@@ -2,7 +2,7 @@
 Endless Runner: Stick Run
 Name: Keaton Shawhan
 Date: 11/6/23
-Points hit (7/15):
+Points hit (8/15):
   Use multiple Scene classes (dictated by your game's style) (1)
   Have some form of player input/control appropriate to your game design (1)
   Include one or more animated characters that use a texture atlas* (1)
@@ -10,8 +10,11 @@ Points hit (7/15):
   Be theoretically endless (1)
   Be playable for at least 15 seconds for a new player of low to moderate skill (1)
   Run without significant crashes or errors (1)
+  Simulate scrolling with a tileSprite (or equivalent means) (1)
 
 
+  Citations:
+  https://pixabay.com/music/synthwave-synthwave-80s-110045/
 */
 // Spritesheet by ElvGames: https://elv-games.itch.io/free-fantasy-dreamland-sprites
 
@@ -30,8 +33,8 @@ let config = {
     },
     width: 1000,
     height: 600,
-    // scene: [ Menu, Play ]
-    scene: [ Play ]
+    scene: [ Menu, Play ]
+    // scene: [ Play ]
 }
 
 let game = new Phaser.Game(config)
