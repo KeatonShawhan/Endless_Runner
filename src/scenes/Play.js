@@ -14,8 +14,9 @@ class Play extends Phaser.Scene {
   create() {
       this.cameras.main.setBackgroundColor(0xDDDDDD);
       this.background = this.add.tileSprite(0, 0, 0, 0, 'background').setOrigin(0, 0);
-      this.music = this.sound.add('loop', {loop: true}).setVolume(0.5);
+      this.music = this.sound.add('loop', {loop: true}).setVolume(0.3);
       this.music.play();
+      
 
       cursors = this.input.keyboard.createCursorKeys();
 
@@ -111,43 +112,57 @@ class Play extends Phaser.Scene {
 
       this.physics.add.collider(this.player, this.platforms, this.onPlatformCollided, null, this);
 
+
+      this.lives = 3;
+      this.played = false;
   }
 
   update() {
-    this.background.tilePositionX += 1;
-    const ACCELERATION = 500;
+    if (this.lives > 0){
+        this.background.tilePositionX += 1;
+        const ACCELERATION = 500;
 
-    if (cursors.left.isDown) {
-        this.player.setAccelerationX(-ACCELERATION);
-        this.player.play("walk-left", true);
-    } 
-    else if (cursors.right.isDown) {
-        this.player.setAccelerationX(ACCELERATION);
-        this.player.play("walk-right", true);
-    } 
-    else {
-        // When no left/right arrow key is pressed, stop accelerating the player
-        this.player.setAccelerationX(0);
-        this.player.play("idle", true);
+        if (cursors.left.isDown) {
+            this.player.setAccelerationX(-ACCELERATION);
+            this.player.play("walk-left", true);
+        } 
+        else if (cursors.right.isDown) {
+            this.player.setAccelerationX(ACCELERATION);
+            this.player.play("walk-right", true);
+        } 
+        else {
+            // When no left/right arrow key is pressed, stop accelerating the player
+            this.player.setAccelerationX(0);
+            this.player.play("idle", true);
+        }
+
+        // Jumping
+        if (cursors.up.isDown && this.player.body.touching.down) {
+            this.player.setVelocityY(-1300);
+        }
+
+        if (!this.player.body.touching.down) {
+            this.player.play("jump", true);
+        }
+        this.platform1.update();
+        this.platform2.update();
+        this.platform3.update();
+    }else{
+        this.death();
     }
-
-    // Jumping
-    if (cursors.up.isDown && this.player.body.touching.down) {
-        this.player.setVelocityY(-1300);
-    }
-
-    if (!this.player.body.touching.down) {
-        this.player.play("jump", true);
-    }
-    this.platform1.update();
-    this.platform2.update();
-    this.platform3.update();
-
   }
   onPlatformCollided(player, platform) {
     if (player.body.touching.down && !platform.jumped) {
-        this.cameras.main.setBackgroundColor(platform.color); 
+        this.cameras.main.setBackgroundColor(platform.color);
+        this.sound.play("land");
         platform.setWhite();
+    }
+  }
+  death(){
+    if (!this.played){
+        this.sound.play("lose_game");
+        this.played = true;
+        this.music.stop();
     }
   }
 

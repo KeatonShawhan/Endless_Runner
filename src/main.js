@@ -3,7 +3,7 @@ Endless Runner: Stick Run
 Name: Keaton Shawhan
 Date: 11/6/23
 Hours spent: 8
-Points hit (9/15):
+Points hit (11/15):
   Use multiple Scene classes (dictated by your game's style) (1)
   Have some form of player input/control appropriate to your game design (1)
   Include one or more animated characters that use a texture atlas* (1)
@@ -13,11 +13,16 @@ Points hit (9/15):
   Run without significant crashes or errors (1)
   Simulate scrolling with a tileSprite (or equivalent means) (1)
   Include in-game instructions using text or other means (e.g., tooltips, tutorial, diagram, etc.) (1)
+  Use a minimum of four sound effects for key mechanics, UI, and/or significant events appropriate to your game design (1)
+  Have looping background music (1)
 
 
   Citations:
   https://pixabay.com/music/synthwave-synthwave-80s-110045/
   https://freesound.org/people/tim.kahn/sounds/44876/
+  https://freesound.org/people/JustInvoke/sounds/138490/
+  https://freesound.org/people/Eponn/sounds/619835/
+
 
 */
 

@@ -13,6 +13,8 @@ class Menu extends Phaser.Scene{
     this.load.image('controls', './assets/controls.png');
     this.load.image('goal', './assets/goal.png');
     this.load.audio('lose_life', './assets/lose_life.flac');
+    this.load.audio('land', './assets/land_on_platform.wav');
+    this.load.audio('lose_game', './assets/lose_game.wav');
   }
 
   create(){
