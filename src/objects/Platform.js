@@ -4,17 +4,23 @@ class Platform extends Phaser.Physics.Arcade.Sprite {
       
       scene.add.existing(this).setScale(0.7);
       scene.physics.add.existing(this, true); // true makes it a static body
-
+      this.color = 0;
       this.initRandomArray();
       this.initPlatform(pointValue, moveSpeed);
+      this.jumped = false;
   }
 
   update() {
     this.x -= this.speed;
     if (this.x <= 0 - this.width) {
+        console.log(this.color);
+        if (this.color != Phaser.Display.Color.GetColor(255, 255, 255)){
+          this.scene.sound.play('lose_life');
+        }
         this.x = game.config.width;
         this.randomColor();
         this.randomHeight();
+        this.jumped = false;
     }
     this.body.x = this.x - this.width * 0.33;
     this.body.y = this.y - this.height * 0.35;
@@ -49,6 +55,8 @@ class Platform extends Phaser.Physics.Arcade.Sprite {
 
   setWhite() {
     let temp = Phaser.Display.Color.GetColor(255, 255, 255); // RGB values for white
+    this.jumped = true;
+    this.color = temp;
     this.setTint(temp);
   }
 }

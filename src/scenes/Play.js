@@ -145,7 +145,7 @@ class Play extends Phaser.Scene {
 
   }
   onPlatformCollided(player, platform) {
-    if (player.body.touching.down) {
+    if (player.body.touching.down && !platform.jumped) {
         this.cameras.main.setBackgroundColor(platform.color); 
         platform.setWhite();
     }

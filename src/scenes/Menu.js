@@ -10,12 +10,23 @@ class Menu extends Phaser.Scene{
     this.load.image('menu_character', './assets/sprite_stop_0.png');
     this.load.audio('menu_select', './assets/menu_select.mp3');
     this.load.audio('loop', '/assets/synthwave-80s-110045.mp3');
+    this.load.image('controls', './assets/controls.png');
+    this.load.image('goal', './assets/goal.png');
+    this.load.audio('lose_life', './assets/lose_life.flac');
   }
 
   create(){
     this.player = this.physics.add.sprite(width/2, height/2, 'menu_character').setScale(2);
     this.player.y = 505;
     this.player.x = 1000;
+
+    this.controls = this.add.sprite(0, 0, "controls").setScale(1.2).setTint(0x000000);
+    this.controls.y = 200;
+    this.controls.x = 200;
+
+    this.goal = this.add.sprite(0, 0, "goal").setScale(1.2);
+    this.goal.y = 200;
+    this.goal.x = 800;
 
     this.centerX=game.config.width/2;
     this.centerY=game.config.height/2;
