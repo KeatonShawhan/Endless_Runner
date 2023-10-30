@@ -14,9 +14,11 @@ class Play extends Phaser.Scene {
   create() {
       this.cameras.main.setBackgroundColor(0xDDDDDD);
       this.background = this.add.tileSprite(0, 0, 0, 0, 'background').setOrigin(0, 0);
-      this.music = this.sound.add('loop', {loop: true}).setVolume(0.3);
+      this.music = this.sound.add('loop', {loop: true}).setVolume(0.1);
+      this.lose_game = this.sound.add('lose_game').setVolume(0.2);
       this.music.play();
       
+      this.highScore = localStorage.getItem('highScore') || 0;
 
       cursors = this.input.keyboard.createCursorKeys();
 
@@ -115,10 +117,26 @@ class Play extends Phaser.Scene {
 
       this.lives = 3;
       this.played = false;
-  }
+
+      this.gameTime = 0;
+      this.gameTimerEvent = this.time.addEvent({
+          delay: 1000,
+          callback: this.updateGameTime,
+          callbackScope: this,
+          loop: true
+      });
+
+      this.timeText = this.add.text(16, 16, 'Time: 0', { fontSize: '32px', fill: '#FFF' });
+
+      this.highScoreText = this.add.text(game.config.width - 16, 16, 'High Score: ' + this.highScore, { fontSize: '32px', fill: '#FFF'});
+      this.highScoreText.setOrigin(1, 0);
+
+
+    }
 
   update() {
     if (this.lives > 0){
+        this.timeText.setText('Time: ' + this.gameTime);
         this.background.tilePositionX += 1;
         const ACCELERATION = 500;
 
@@ -160,10 +178,29 @@ class Play extends Phaser.Scene {
   }
   death(){
     if (!this.played){
-        this.sound.play("lose_game");
+        let overlay = this.add.rectangle(game.config.width / 2, game.config.height / 2, game.config.width, game.config.height, 0x000000);
+        overlay.alpha = 0.75;
+        this.finalTimeText = this.add.text(game.config.width / 2, game.config.height / 2 - 80, 'You died!', { fontSize: '96px', fill: '#FFF' }).setOrigin(0.5);
+        this.finalTimeText = this.add.text(game.config.width / 2, game.config.height / 2, 'Final Time: ' + this.gameTime, { fontSize: '76px', fill: '#FFF' }).setOrigin(0.5);
+        this.lose_game.play();
         this.played = true;
         this.music.stop();
+        let restartButton = this.add.text(game.config.width / 2, game.config.height / 2 + 50, 'Restart', { fontSize: '64px', fill: '#FFF' }).setOrigin(0.5).setInteractive();
+
+        restartButton.on('pointerdown', () => { 
+            this.scene.start('menuScene'); 
+        });
+        if (this.gameTime > this.highScore) {
+          this.highScore = this.gameTime;
+          this.highScoreText.setText('High Score: ' + this.highScore);
+          localStorage.setItem('highScore', this.highScore);
+      }
     }
   }
+  updateGameTime() {
+    if (this.lives > 0) {
+        this.gameTime += 1; // Increment by one second
+    }
+}
 
 }

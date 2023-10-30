@@ -15,6 +15,7 @@ class Menu extends Phaser.Scene{
     this.load.audio('lose_life', './assets/lose_life.flac');
     this.load.audio('land', './assets/land_on_platform.wav');
     this.load.audio('lose_game', './assets/lose_game.wav');
+    this.load.image('help', './assets/help.png');
   }
 
   create(){
@@ -29,6 +30,10 @@ class Menu extends Phaser.Scene{
     this.goal = this.add.sprite(0, 0, "goal").setScale(1.2);
     this.goal.y = 200;
     this.goal.x = 800;
+
+    this.help = this.add.sprite(0, 0, "help").setScale(1.3);
+    this.help.y = 400;
+    this.help.x = 800;
 
     this.centerX=game.config.width/2;
     this.centerY=game.config.height/2;
