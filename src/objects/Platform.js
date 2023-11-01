@@ -16,7 +16,6 @@ class Platform extends Phaser.Physics.Arcade.Sprite {
         if (this.color != Phaser.Display.Color.GetColor(255, 255, 255)){
           this.scene.sound.play('lose_life');
           this.scene.lives -= 1;
-          console.log(this.scene.lives);
         }
         this.x = game.config.width;
         this.randomColor();
