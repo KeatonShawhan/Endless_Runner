@@ -20,17 +20,11 @@ Points hit (15/15):
   Use randomness to generate escalating challenge, e.g. terrain, pickups, etc. (1)
   Include in-game credits for all roles, assets, music, etc. (1)
 
-
-
-
   Citations:
   https://pixabay.com/music/synthwave-synthwave-80s-110045/
   https://freesound.org/people/tim.kahn/sounds/44876/
   https://freesound.org/people/JustInvoke/sounds/138490/
   https://freesound.org/people/Eponn/sounds/619835/
-  
-
-
 */
 
 "use strict"
@@ -43,7 +37,7 @@ let config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: true
+            debug: false
         }
     },
     width: 1000,

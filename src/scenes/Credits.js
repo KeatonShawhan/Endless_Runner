@@ -6,7 +6,6 @@ class Credits extends Phaser.Scene {
   create() {
     this.cameras.main.setBackgroundColor(0x000000);
 
-    // Add a title for the Credits
     this.add.text(game.config.width/2, 50, "Music", { fontSize: '48px', fill: '#ff0000' }).setOrigin(0.5);
 
     let startY = 100;

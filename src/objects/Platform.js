@@ -3,7 +3,7 @@ class Platform extends Phaser.Physics.Arcade.Sprite {
       super(scene, x, y, 'platform');
       
       scene.add.existing(this).setScale(0.7);
-      scene.physics.add.existing(this, true); // true makes it a static body
+      scene.physics.add.existing(this, true);
       this.color = 0;
       this.initRandomArray();
       this.initPlatform(pointValue, moveSpeed);
@@ -55,7 +55,7 @@ class Platform extends Phaser.Physics.Arcade.Sprite {
   }
 
   setWhite() {
-    let temp = Phaser.Display.Color.GetColor(255, 255, 255); // RGB values for white
+    let temp = Phaser.Display.Color.GetColor(255, 255, 255);
     this.jumped = true;
     this.color = temp;
     this.setTint(temp);

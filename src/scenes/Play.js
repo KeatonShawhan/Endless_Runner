@@ -66,7 +66,7 @@ class Play extends Phaser.Scene {
       this.player.body.setCollideWorldBounds(true);
       this.player.body.setSize(30, 73).setOffset(37, 20);
       this.PLAYER_VELOCITY = 350;
-      this.player.setDragX(2000); // Adjust this value to your liking for the desired amount of drag/friction
+      this.player.setDragX(2000);
       
       this.floor = this.physics.add.staticGroup();
 
@@ -131,12 +131,13 @@ class Play extends Phaser.Scene {
       this.highScoreText = this.add.text(game.config.width - 16, 16, 'High Score: ' + this.highScore, { fontSize: '32px', fill: '#FFF'});
       this.highScoreText.setOrigin(1, 0);
 
-
+      this.livesText = this.add.text(360, 16, 'Lives: ', { fontSize: '32px', fill: '#FFF' });
     }
 
   update() {
     if (this.lives > 0){
         this.timeText.setText('Time: ' + this.gameTime);
+        this.livesText.setText('Lives: ' + this.lives);
         this.background.tilePositionX += 1;
         const ACCELERATION = 500;
 
@@ -178,14 +179,15 @@ class Play extends Phaser.Scene {
   }
   death(){
     if (!this.played){
+        this.livesText.setText('Lives: ' + 0);
         let overlay = this.add.rectangle(game.config.width / 2, game.config.height / 2, game.config.width, game.config.height, 0x000000);
         overlay.alpha = 0.75;
-        this.finalTimeText = this.add.text(game.config.width / 2, game.config.height / 2 - 80, 'You died!', { fontSize: '96px', fill: '#FFF' }).setOrigin(0.5);
+        this.finalTimeText = this.add.text(game.config.width / 2, game.config.height / 2 - 100, 'You died!', { fontSize: '96px', fill: '#FFF' }).setOrigin(0.5);
         this.finalTimeText = this.add.text(game.config.width / 2, game.config.height / 2, 'Final Time: ' + this.gameTime, { fontSize: '76px', fill: '#FFF' }).setOrigin(0.5);
         this.lose_game.play();
         this.played = true;
         this.music.stop();
-        let restartButton = this.add.text(game.config.width / 2, game.config.height / 2 + 50, 'Restart', { fontSize: '64px', fill: '#FFF' }).setOrigin(0.5).setInteractive();
+        let restartButton = this.add.text(game.config.width / 2, game.config.height / 2 + 100, 'Restart', { fontSize: '64px', fill: '#FFF' }).setOrigin(0.5).setInteractive();
 
         restartButton.on('pointerdown', () => { 
             this.scene.start('menuScene'); 
