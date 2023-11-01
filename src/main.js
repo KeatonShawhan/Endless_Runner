@@ -3,7 +3,7 @@ Endless Runner: Stick Run
 Name: Keaton Shawhan
 Date: 11/6/23
 Hours spent: 8
-Points hit (14/15):
+Points hit (15/15):
   Use multiple Scene classes (dictated by your game's style) (1)
   Have some form of player input/control appropriate to your game design (1)
   Include one or more animated characters that use a texture atlas* (1)
@@ -18,6 +18,7 @@ Points hit (14/15):
   Include some metric of accomplishment that a player can improve over time, e.g., score, survival time, etc. (1)
   Properly transition between Scenes and allow the player to restart w/out having to reload the page (1)
   Use randomness to generate escalating challenge, e.g. terrain, pickups, etc. (1)
+  Include in-game credits for all roles, assets, music, etc. (1)
 
 
 
@@ -27,6 +28,7 @@ Points hit (14/15):
   https://freesound.org/people/tim.kahn/sounds/44876/
   https://freesound.org/people/JustInvoke/sounds/138490/
   https://freesound.org/people/Eponn/sounds/619835/
+  
 
 
 */
@@ -46,7 +48,7 @@ let config = {
     },
     width: 1000,
     height: 600,
-    scene: [ Menu, Play ]
+    scene: [ Menu, Play, Credits ]
     // scene: [ Play ]
 }
 

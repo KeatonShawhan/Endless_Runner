@@ -16,6 +16,7 @@ class Menu extends Phaser.Scene{
     this.load.audio('land', './assets/land_on_platform.wav');
     this.load.audio('lose_game', './assets/lose_game.wav');
     this.load.image('help', './assets/help.png');
+    this.load.image('credits_button', './assets/credits.png');
   }
 
   create(){
@@ -55,6 +56,13 @@ class Menu extends Phaser.Scene{
     this.title_img = this.add.sprite(0, 0, "title_img");
     this.title_img.y = this.centerY-100;
     this.title_img.x = this.centerX;
+
+    this.creditsButton = this.physics.add.sprite(0, 0, "credits_button").setScale(0.8);
+    this.creditsButton.y = this.centerY + 200;
+    this.creditsButton.x = this.centerX;
+    this.creditsButton.setInteractive();
+    this.creditsButton.on('pointerdown', () => this.scene.start("creditsScene"));
+
   }
 
   update() {

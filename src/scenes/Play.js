@@ -103,12 +103,12 @@ class Play extends Phaser.Scene {
       this.platforms.add(this.platform1);
 
       randomHeight = Phaser.Math.RND.pick(this.random_array);
-      this.platform2 = new Platform(this, width + 500, randomHeight);
+      this.platform2 = new Platform(this, width + 400, randomHeight);
       this.platform2.initPlatform(1, 2);
       this.platforms.add(this.platform2);
 
       randomHeight = Phaser.Math.RND.pick(this.random_array);
-      this.platform3 = new Platform(this, width + 1000, randomHeight);
+      this.platform3 = new Platform(this, width + 800, randomHeight);
       this.platform3.initPlatform(1, 2);
       this.platforms.add(this.platform3);
 
