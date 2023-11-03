@@ -138,7 +138,7 @@ class Play extends Phaser.Scene {
     if (this.lives > 0){
         this.timeText.setText('Time: ' + this.gameTime);
         this.livesText.setText('Lives: ' + this.lives);
-        this.background.tilePositionX += 1;
+        this.background.tilePositionX += (1+this.gameTime/100);
         const ACCELERATION = 500;
 
         if (cursors.left.isDown) {

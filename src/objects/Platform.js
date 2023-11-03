@@ -11,7 +11,7 @@ class Platform extends Phaser.Physics.Arcade.Sprite {
   }
 
   update() {
-    this.x -= this.speed;
+    this.x -= this.speed+(this.scene.gameTime/100);
     if (this.x <= 0 - this.width) {
         if (this.color != Phaser.Display.Color.GetColor(255, 255, 255)){
           this.scene.sound.play('lose_life');
